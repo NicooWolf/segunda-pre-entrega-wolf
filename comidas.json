@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Asado",
+    "price": 1000
+  },
+  {
+    "id": 2,
+    "name": "Parrillada",
+    "price": 1500
+  },
+  {
+    "id": 3,
+    "name": "Costillar",
+    "price": 2000
+  },
+  {
+    "id": 4,
+    "name": "Pollo",
+    "price": 900
+  },
+  {
+    "id": 5,
+    "name": "Choripan",
+    "price": 500
+  },
+  {
+    "id": 6,
+    "name": "Morcipan",
+    "price": 600
+  }
+]
