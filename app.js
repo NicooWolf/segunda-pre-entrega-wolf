@@ -19,10 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Agrego el carrito al local storage
 
-  if (localStorage.getItem("carrito")) {
-    carrito = JSON.parse(localStorage.getItem("carrito"));
-    pintarCarrito();
-  }
+  localStorage.getItem("carrito") &&
+    (carrito = JSON.parse(localStorage.getItem("carrito")));
+  pintarCarrito();
 });
 
 // Acciones de click
@@ -61,9 +60,7 @@ const pintarCards = (data) => {
 };
 
 const addCarrito = (e) => {
-  if (e.target.classList.contains("btn-dark")) {
-    setCarrito(e.target.parentElement);
-  }
+  e.target.classList.contains("btn-dark") && setCarrito(e.target.parentElement);
   e.stopPropagation();
 };
 
@@ -74,9 +71,9 @@ const setCarrito = (objeto) => {
     price: objeto.querySelector("p").textContent,
     amount: 1,
   };
-  if (carrito.hasOwnProperty(plato.id)) {
-    plato.amount = carrito[plato.id].amount + 1;
-  }
+  carrito.hasOwnProperty(plato?.id) &&
+    (plato.amount = carrito[plato.id].amount + 1);
+
   carrito[plato.id] = { ...plato };
   pintarCarrito();
 };
@@ -151,9 +148,8 @@ const btnAccion = (e) => {
   if (e.target.classList.contains("btn-warning")) {
     const plato = carrito[e.target.dataset.id];
     plato.amount--;
-    if (plato.amount === 0) {
-      delete carrito[e.target.dataset.id];
-    }
+    plato.amount === 0 && delete carrito[e.target.dataset.id];
+
     pintarCarrito();
   }
   e.stopPropagation();
