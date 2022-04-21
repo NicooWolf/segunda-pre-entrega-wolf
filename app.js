@@ -126,8 +126,26 @@ const pintarFooter = () => {
 
   const btnVaciar = document.getElementById("vaciar-carrito");
   btnVaciar.addEventListener("click", () => {
-    carrito = {};
-    pintarCarrito();
+    Swal.fire({
+      title: "Estas seguro?",
+      text: "Todos los platos que has seleccionado se van a borrar!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, estoy seguro!",
+      cancelButtonText: "No, cancelar!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          "Carrito vacio!",
+          "Tu carrito se ha vaciado, vuelve a agregar platos!",
+          "success"
+        );
+        carrito = {};
+        pintarCarrito();
+      }
+    });
   });
 };
 
@@ -141,6 +159,15 @@ const btnAccion = (e) => {
     plato.amount++;
     carrito[e.target.dataset.id] = { ...plato };
     pintarCarrito();
+    Toastify({
+      text: "Has sumado un plato!",
+      className: "info",
+      gravity: "top",
+      duration: 1000,
+      style: {
+        background: "linear-gradient(to right, #4facfe 0%, #00f2fe 100%)",
+      },
+    }).showToast();
   }
 
   // Disminuir
@@ -151,6 +178,15 @@ const btnAccion = (e) => {
     plato.amount === 0 && delete carrito[e.target.dataset.id];
 
     pintarCarrito();
+    Toastify({
+      text: "Has eliminado un plato!",
+      className: "info",
+      gravity: "top",
+      duration: 1000,
+      style: {
+        background: "linear-gradient(to right, #f83600 0%, #f9d423 100%)",
+      },
+    }).showToast();
   }
   e.stopPropagation();
 };
